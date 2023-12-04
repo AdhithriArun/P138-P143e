@@ -163,3 +163,46 @@ function paddleInCanvas(){
     mouseY =0;
   }  
 }
+
+rightWristX = "";
+rightWristY = "";
+scorerightWrist = 0;
+
+function setup()
+{
+  var canvas = createCanvas(650,400);
+  video = createCapture(VIDEO);
+  video.size(700,600);
+  video.hide();
+
+  poseNet = ml5.poseNet(video, modelLoaded);
+  poseNet.on('pose', gotPoses);
+}
+
+function modelLoaded()
+{
+	console.log('Model Loaded!');
+}
+
+function draw()
+{
+  background("#D3D3D3");
+  image(video, 0, 0, 700, 600);
+  if(scorerightWrist > 0.2)
+  {
+    fill("#412ba6");
+    stroke("#1d1447");
+    circle(rightWristX, rightWristY, 25);
+  }
+}
+
+function gotPoses(results)
+{
+  if(length.results > 0)
+  {
+    console.log(results);
+    rightWristX = results[0].pose.rightWrist.x;
+    rightWristY = results[0].pose.rightWrist.y;
+    scorerightWrist = results[0].keypoints[10].score.rightWrist;
+  }
+}

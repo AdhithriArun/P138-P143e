@@ -25,6 +25,12 @@
     font-size: 22px;
 }
 
+canvas
+{
+    box-shadow: 10px 10px 10px darkblue;
+    border-radius: 20px;
+}
+
 .copy_right_footer
 {
     background-color: blue;
@@ -40,4 +46,11 @@
 {
     width: 90%;
 }
- 
+
+video
+{
+    background: url("game_console");
+    background-size: cover;
+    background-position: center;
+    padding: 25px;
+}
